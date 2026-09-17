@@ -1,3 +1,27 @@
+server:
+  port: 8080
+
 spring:
   application:
-    name: ApiGateway
+    name: api-gateway
+
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: flow-manager-route
+              uri: lb://flow-manager
+              predicates:
+                - Path=/api/v1/**
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
