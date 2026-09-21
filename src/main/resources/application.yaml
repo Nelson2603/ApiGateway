@@ -15,6 +15,26 @@ spring:
               predicates:
                 - Path=/api/v1/**
 
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: api-gateway
+            client-secret: ${KEYCLOAK_SECRET}
+            authorization-grant-type: authorization_code
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8180/realms/myapp
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8180/realms/myapp
+
+
 
 eureka:
   client:
