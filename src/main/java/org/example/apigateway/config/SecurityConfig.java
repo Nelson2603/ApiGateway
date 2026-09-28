@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 public class SecurityConfig {
 
           //ДЛЯ API
+
     @Bean
     @Order(1)
     public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
